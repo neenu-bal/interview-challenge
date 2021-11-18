@@ -10,7 +10,6 @@ interface DatasetResponse {
 interface FullDataResponse {
   dataPoints: DataResponse;
   dataSets: DatasetResponse[];
-  graphs: DatasetResponse[];
 }
 
 interface ElementGroup {
@@ -21,33 +20,18 @@ interface ElementGroup {
   elements: Element[];
 }
 
-type ElementType = 'DATA_POINT' | 'DATA_SET' | 'DATA_CHART' | 'FILTER_SET';
+type ElementType = 'DATA_POINT' | 'DATA_SET';
 
 interface Element {
   name: string;
   type: ElementType;
   displayName?: string;
-  position: ElementPosition;
+  width: number;
   fields?: DatasetFields[];
-  dimensions?: DatasetFields[];
-  selectedDimensions?: DatasetFields[];
-  xAxisDimensions?: DatasetFields[];
 }
 
 interface DatasetFields {
   name: string;
-}
-
-interface ElementPosition {
-  displayOrder: number;
-  span: number;
-  relativePosition?: RelativePosition[];
-}
-
-enum RelativePosition {
-  first = 'first',
-  middle = 'middle',
-  last = 'last'
 }
 
 interface FieldDefinitions {
@@ -65,124 +49,14 @@ interface FieldDefinition {
   aggFn: 'none' | 'sum' | 'average';
 }
 
-type FilterValue = string | string[];
-
-interface Filter {
-  name: string;
-  label: string;
-  type: 'string' | 'string[]' | 'dateRange';
-  required: boolean;
-  value: FilterValue;
-  format?: string;
-  options?: string[];
-}
-
 interface LayoutResponse {
   displayName: string;
-  filters: Filter[];
   fieldDefinitions: FieldDefinitions;
   layout: ElementGroup[];
 }
 
 const newLayoutResponse: LayoutResponse = {
   displayName: 'Cross Channel',
-  filters: [
-    {
-      name: 'conversion_type',
-      label: 'Conversion Type',
-      type: 'string',
-      value: 'Online Orders',
-      format: 'none',
-      required: true,
-      options: ['All Orders', 'Online Orders', 'Retail Orders']
-    },
-    {
-      name: 'orderdate',
-      label: 'Order Date',
-      value: ['2021-01-01', '2021-02-01'],
-      type: 'dateRange',
-      format: 'yyyy-MM-dd',
-      required: true
-    },
-    {
-      name: 'day',
-      label: 'Time Period',
-      value: ['2021-01-01', '2021-02-01'],
-      type: 'dateRange',
-      format: 'yyyy-MM-dd',
-      required: true
-    },
-    {
-      name: 'channel',
-      label: 'Channel',
-      value: ['Affiliate', 'Catalog'],
-      type: 'string[]',
-      format: 'none',
-      required: false,
-      options: ['Affiliate', 'Catalog', 'Email', 'Facebook', 'Google']
-    },
-    {
-      name: 'segment',
-      label: 'Segment',
-      value: ['Customers', 'Prospects'],
-      type: 'string[]',
-      format: 'none',
-      required: false,
-      options: ['Customers', 'Prospects']
-    },
-    {
-      name: 'tactic',
-      label: 'Tactic',
-      value: [
-        'Catalog-Buyer',
-        'Catalog-Other',
-        'Catalog-Postal Append',
-        'Catalog-Prospects',
-        'FB-CRM-WPromote',
-        'FB-Prospecting',
-        'FB-Retargeting',
-        'Impact',
-        'Klaviyo',
-        'PLA-Non Brand',
-        'PPC-Brand',
-        'PPC-Non Brand'
-      ],
-      type: 'string[]',
-      format: 'none',
-      required: false,
-      options: [
-        'Catalog-Buyer',
-        'Catalog-Other',
-        'Catalog-Postal Append',
-        'Catalog-Prospects',
-        'FB-CRM-WPromote',
-        'FB-Prospecting',
-        'FB-Retargeting',
-        'Impact',
-        'Klaviyo',
-        'PLA-Non Brand',
-        'PPC-Brand',
-        'PPC-Non Brand'
-      ]
-    },
-    {
-      name: 'resolution',
-      label: 'Resolution',
-      value: 'Week',
-      type: 'string',
-      options: ['Day', 'Week', 'Month', 'Year'],
-      format: 'none',
-      required: true
-    },
-    {
-      name: 'dimensions',
-      label: 'Dimensions',
-      value: ['Channel', 'Tactic'],
-      type: 'string[]',
-      options: ['Segment', 'Channel', 'Tactic'],
-      required: true
-    }
-  ],
   fieldDefinitions: {
     channel: {
       label: 'Channel',
@@ -330,68 +204,35 @@ const newLayoutResponse: LayoutResponse = {
   },
   layout: [
     {
-      name: 'contextBar',
-      label: '',
-      type: 'FILTER_SET',
-      position: { displayOrder: 1, span: 12 },
-      elements: [
-        {
-          name: 'conversion_type',
-          type: 'FILTER_SET',
-          position: { displayOrder: 1, span: 0 }
-        },
-        {
-          name: 'channel',
-          type: 'FILTER_SET',
-          position: { displayOrder: 1, span: 0 }
-        },
-        {
-          name: 'segment',
-          type: 'FILTER_SET',
-          position: { displayOrder: 1, span: 0 }
-        },
-        {
-          name: 'tactic',
-          type: 'FILTER_SET',
-          position: { displayOrder: 1, span: 0 }
-        },
-        {
-          name: 'day',
-          type: 'FILTER_SET',
-          position: { displayOrder: 2, span: 0 }
-        }
-      ]
-    },
-    {
-      name: 'incrementalityMetrics',
+      name: 'overallMetrics',
       type: 'DATA_POINT',
-      label: 'Incrementality Metrics',
-      position: { displayOrder: 2, span: 12 },
+      label: 'Overall Metrics',
+      width: 12,
       elements: [
         {
           name: 'mediaSpend',
           type: 'DATA_POINT',
-          position: { displayOrder: 1, span: 2 }
+          width: 2
         },
         {
           name: 'percSalesI',
           type: 'DATA_POINT',
-          position: { displayOrder: 2, span: 2 }
+          width: 2
         },
         {
           name: 'salesI',
           type: 'DATA_POINT',
-          position: { displayOrder: 3, span: 4 }
+          width: 4
         },
         {
           name: 'cpoI',
           type: 'DATA_POINT',
-          position: { displayOrder: 4, span: 2 }
+          width: 2
         },
         {
           name: 'netProfitIPerDollar',
           type: 'DATA_POINT',
-          position: { displayOrder: 5, span: 2 }
+          width: 2
         }
       ]
     },
@@ -399,70 +240,54 @@ const newLayoutResponse: LayoutResponse = {
       name: 'observedMetrics',
       label: 'Observed Metrics',
       type: 'DATA_POINT',
-      position: { displayOrder: 3, span: 8 },
+      width: 8,
       elements: [
         {
           name: 'totalOrders',
           type: 'DATA_POINT',
-          position: { displayOrder: 1, span: 4 }
+          width: 4
         },
         {
           name: 'baselineSales',
           type: 'DATA_POINT',
-          position: { displayOrder: 2, span: 4 }
+          width: 4
         },
         {
           name: 'totalSales',
           type: 'DATA_POINT',
-          position: { displayOrder: 2, span: 4 }
+          width: 4
         }
       ]
     },
     {
-      name: 'vendorMetrics',
-      label: 'Vendor Metrics',
+      name: 'sourceMetrics',
+      label: 'Source Metrics',
       type: 'DATA_POINT',
-      position: { displayOrder: 4, span: 4 },
+      width: 4,
       elements: [
         {
           name: 'salesLT',
           type: 'DATA_POINT',
-          position: { displayOrder: 4, span: 6 }
+          width: 6
         },
         {
           name: 'cpoLT',
           type: 'DATA_POINT',
-          position: { displayOrder: 6, span: 6 }
-        }
-      ]
-    },
-    {
-      name: 'chart',
-      label: 'Performance over Time',
-      type: 'DATA_CHART',
-      position: { displayOrder: 5, span: 12 },
-      elements: [
-        {
-          name: 'chart',
-          displayName: 'Performance over Time',
-          type: 'DATA_CHART',
-          position: { displayOrder: 1, span: 12 },
-          selectedDimensions: [{ name: 'salesLT' }, { name: 'salesI' }],
-          xAxisDimensions: [{ name: 'date' }]
+          width: 6
         }
       ]
     },
     {
       name: 'summary',
-      label: 'Portfolio Details',
+      label: 'Summary',
       type: 'DATA_SET',
-      position: { displayOrder: 6, span: 12 },
+      width: 12
       elements: [
         {
           name: 'summary',
-          displayName: 'Portfolio Details',
+          displayName: 'Summary',
           type: 'DATA_SET',
-          position: { displayOrder: 1, span: 12 },
+          width: 12
           fields: [
             { name: 'channel' },
             { name: 'segment' },
@@ -691,55 +516,6 @@ const backendDataResponse: FullDataResponse = {
           ordersI: 56.885004,
           percSalesI: 0.0021266968647946334,
           percOrdersI: 0.0011558468759524537
-        }
-      ]
-    }
-  ],
-  graphs: [
-    {
-      name: 'chart',
-      data: [
-        {
-          year: 2020,
-          week: 53,
-          salesLT: 12328.7,
-          salesI: 945.61129,
-          date: 1609113600000
-        },
-        {
-          year: 2021,
-          week: 1,
-          salesLT: 33442.5,
-          salesI: 2565.0397500000004,
-          date: 1609718400000
-        },
-        {
-          year: 2021,
-          week: 2,
-          salesLT: 3482489.4000000004,
-          salesI: 2045825.01998,
-          date: 1610323200000
-        },
-        {
-          year: 2021,
-          week: 3,
-          salesLT: 45926.700000000004,
-          salesI: 3522.5778900000005,
-          date: 1610928000000
-        },
-        {
-          year: 2021,
-          week: 4,
-          salesLT: 25485.8,
-          salesI: 1954.76086,
-          date: 1611532800000
-        },
-        {
-          year: 2021,
-          week: 5,
-          salesLT: 8023.4,
-          salesI: 615.39478,
-          date: 1612137600000
         }
       ]
     }

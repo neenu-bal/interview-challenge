@@ -22,6 +22,8 @@ In order to build the marketing analytics dashboard, the following has been prov
 
 On the right-hand side of the[ design mockup](https://www.figma.com/file/81BjV4wM7ULNuep6siNKBm/Interview-Challenge%3A-Design-a-Dashboard?node-id=0%3A1) there are names for each section.
 
+The Mocked Data response is available in this repository [here](https://github.com/gcko/interview-challenge/blob/main/dashboard-mock-response.ts).
+
 Each widget on the page is referenced in the layout response under the `layout` property. the `layout` property should be used to create the UI of all of the dashboard widgets.
 
 `fieldDefinitions` is a keyed object of all of the metrics and dimensions that are used throughout the dashboard. each definition includes:

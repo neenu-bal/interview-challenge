@@ -56,7 +56,7 @@ interface LayoutResponse {
 }
 
 const newLayoutResponse: LayoutResponse = {
-  displayName: 'Cross Channel',
+  displayName: 'Marketing Analytics Dashboard',
   fieldDefinitions: {
     channel: {
       label: 'Channel',

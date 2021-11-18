@@ -10,8 +10,6 @@ Our company wants to create a new product and make it available to our clients. 
 
 In order to build the marketing analytics dashboard, the following has been provided:
 
-
-
 1. The design team has provided a high-fidelity mockup that Product wants to see turned into a functional prototype.
 2. The API team has provided response mockups from two API queries they are providing to the front-end.
     1. Layout Response: All configuration data required to build the layout of the dashboard
@@ -38,12 +36,12 @@ Each widget on the page is referenced in the layout response under the `layout` 
 
 
 ## Details about each Layout Section
-2. Metrics Overview
-    2. Metrics are grouped together. Each metric under the group has its own displayOrder that is used to determine how it should be displayed. 
-    3. The data for this is at `backendDataResponse.dataPoints`
-4. Table
-    7. `fields`: a list of objects, where each object contains a name of a field that should be shown for that column. the name points to the key in the data response
-    8. The data for this is at `backendDataResponse.dataSets[0]`
+1. Metrics Overview
+    1. Metrics are grouped together. Each metric under the group has its own displayOrder that is used to determine how it should be displayed. 
+    2. The data for this is at `backendDataResponse.dataPoints`
+2. Table
+    1. `fields`: a list of objects, where each object contains a name of a field that should be shown for that column. the name points to the key in the data response
+    2. The data for this is at `backendDataResponse.dataSets[0]`
 
 
 ## Requirements

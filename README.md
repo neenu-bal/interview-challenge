@@ -20,7 +20,7 @@ In order to build the marketing analytics dashboard, the following has been prov
 
 ## How-to
 
-On the right-hand side of the[ design mockup](https://www.figma.com/file/81BjV4wM7ULNuep6siNKBm/Interview-Challenge%3A-Design-a-Dashboard?node-id=0%3A1) there are names for each section.
+On the right-hand side of the [design mockup](https://www.figma.com/file/81BjV4wM7ULNuep6siNKBm/Interview-Challenge%3A-Design-a-Dashboard?node-id=0%3A1) there are names for each section.
 
 The Mocked Data response is available in this repository [here](https://github.com/gcko/interview-challenge/blob/main/dashboard-mock-response.ts).
 
@@ -38,21 +38,9 @@ Each widget on the page is referenced in the layout response under the `layout` 
 
 
 ## Details about each Layout Section
-
-
-
-1. Context bar
-    1. The context bar is laid-out using the `layout` property, and the contents should be built using the `filters` section of the layout response. None of the fields need to be functional: i.e. selecting an option does not need to do anything.
-        1. type: `string` -> this is a select widget
-        2. type: `string[]` -> this is a multiselect widget
-        3. type: `dateRange` -> this is a calendar widget
-2. Hero Metrics
-    2. Hero metrics are grouped together. Each hero metric under the group has its own displayOrder that is used to determine how it should be displayed. 
+2. Metrics Overview
+    2. Metrics are grouped together. Each metric under the group has its own displayOrder that is used to determine how it should be displayed. 
     3. The data for this is at `backendDataResponse.dataPoints`
-3. Chart
-    4. `selectedDimensions`: determines which fields to show in the chart, the values in the array point to the keys in the data response
-    5. `xAxisDimension`: which field should be used as the x axis dimension. the value points to the key in the data response
-    6. The data for this is at `backendDataResponse.graphs[0]`
 4. Table
     7. `fields`: a list of objects, where each object contains a name of a field that should be shown for that column. the name points to the key in the data response
     8. The data for this is at `backendDataResponse.dataSets[0]`
@@ -62,8 +50,7 @@ Each widget on the page is referenced in the layout response under the `layout` 
 
 1. This must be built within Angular 13
 2. This must use typescript
-3. Use [PrimeNg for Table](https://primefaces.org/primeng/showcase/#/table)
-4. Use [Highcharts for the Chart](https://www.highcharts.com/)
+3. Use whatever you want to build the table
 
 
 ## Output

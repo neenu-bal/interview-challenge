@@ -1,0 +1,10 @@
+header{
+    position: absolute;
+    /* height: 50px; */
+    left: 0%;
+    right: 0%;
+    top: 0px;
+    background: #231190;
+    padding: 16px;
+    color: #FFFFFF;
+}

@@ -22,7 +22,7 @@ background: #31383F;
 }
 .overall{
     display: inline-grid;
-    width: 45%;
+    width: 47%;
 padding: 5px 20px 5px 10px;
 }
 .metrics { 
@@ -38,8 +38,16 @@ font-size: 16px;
 line-height: 20px;
 
 color: #31383F;
-padding: 0px 0px 10px 0px;
+padding: 35px 0px 0px 0px;
 }
+.heading-1{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 9px 0px;
+    color: #31383F;
+    padding: 0px 0px 0px 0px;
+    }
 .heading-summary{
 font-style: normal;
 font-weight: 400;

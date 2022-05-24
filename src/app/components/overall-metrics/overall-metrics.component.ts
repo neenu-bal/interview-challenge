@@ -14,6 +14,9 @@ export class OverallMetricsComponent implements OnInit {
   dataset = backendDataResponse.dataSets[0].data;
   fieldVal: any = [];
   total:any={};
+  returnZero = function(){
+    return 0;
+  }
   constructor() {
     
   }

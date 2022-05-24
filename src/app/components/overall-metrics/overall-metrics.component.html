@@ -16,7 +16,7 @@
             </tr>
             <tr>
                 <td *ngFor="let val of newLayoutResponse.layout[0].elements" class="value">
-                    <div *ngFor="let item of backendDataResponse.dataPoints | keyvalue">
+                    <div *ngFor="let item of backendDataResponse.dataPoints | keyvalue : returnZero">
 
                         <div *ngIf="item.key === val.name">
                             <div *ngFor="let hero of fieldVal">
@@ -53,7 +53,7 @@
                         <table class="table1">
 
                             <th class="table-head"
-                                *ngFor="let dat of backendDataResponse.dataSets[0].data[0] |keyvalue ">
+                                *ngFor="let dat of backendDataResponse.dataSets[0].data[0] |keyvalue : returnZero ">
                                 <div *ngFor="let hero of fieldVal">
                                     <div *ngIf="hero.nam == dat.key">
                                         {{hero.label}}
@@ -64,7 +64,7 @@
                                 <div class="header-divider"></div>
                             </tr>
                             <tr *ngFor="let dat of dataset">
-                                <td class="table-col" *ngFor="let x of dat |keyvalue">
+                                <td class="table-col" *ngFor="let x of dat |keyvalue : returnZero">
 
                                     <div *ngFor="let hero of fieldVal">
                                         <div *ngIf="hero.nam == x.key">
@@ -78,7 +78,7 @@
                                 <div class="header-divider"></div>
                             </tr>
                             <tr>
-                                <td class="table-col" *ngFor="let item of total | keyvalue">
+                                <td class="table-col" *ngFor="let item of total | keyvalue : returnZero">
                                     <div *ngFor="let hero of fieldVal">
                                         <div *ngIf="hero.nam == item.key && hero.nam == 'channel';then contentempty">
                                         </div>
@@ -102,7 +102,7 @@
             </tr>
             <tr>
                 <td *ngFor="let val of layout.elements" class="value">
-                    <div *ngFor="let item of backendDataResponse.dataPoints | keyvalue">
+                    <div *ngFor="let item of backendDataResponse.dataPoints | keyvalue : returnZero">
 
                         <div *ngIf="item.key === val.name">
                             <div *ngFor="let hero of fieldVal">
@@ -136,7 +136,7 @@
                         <table class="table1">
 
                             <th class="table-head"
-                                *ngFor="let dat of backendDataResponse.dataSets[0].data[0] |keyvalue ">
+                                *ngFor="let dat of backendDataResponse.dataSets[0].data[0] |keyvalue : returnZero">
                                 <div *ngFor="let hero of fieldVal">
                                     <div *ngIf="hero.nam == dat.key">
                                         {{hero.label}}
@@ -147,7 +147,7 @@
                                 <div class="header-divider"></div>
                             </tr>
                             <tr *ngFor="let dat of dataset">
-                                <td class="table-col" *ngFor="let x of dat |keyvalue">
+                                <td class="table-col" *ngFor="let x of dat |keyvalue : returnZero">
 
                                     <div *ngFor="let hero of fieldVal">
                                         <div *ngIf="hero.nam == x.key">
@@ -161,7 +161,7 @@
                                 <div class="header-divider"></div>
                             </tr>
                             <tr>
-                                <td class="table-col" *ngFor="let item of total | keyvalue">
+                                <td class="table-col" *ngFor="let item of total | keyvalue : returnZero">
                                     <div *ngFor="let hero of fieldVal">
                                         <div *ngIf="hero.nam == item.key && hero.nam == 'channel';then contentempty">
                                         </div>
@@ -186,7 +186,7 @@
             <tr>
                 <td *ngFor="let val of newLayoutResponse.layout[newLayoutResponse.layout.length-1].elements"
                     class="value">
-                    <div *ngFor="let item of backendDataResponse.dataPoints | keyvalue">
+                    <div *ngFor="let item of backendDataResponse.dataPoints | keyvalue : returnZero">
 
                         <div *ngIf="item.key === val.name">
                             <div *ngFor="let hero of fieldVal">

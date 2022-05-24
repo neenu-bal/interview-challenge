@@ -1,6 +1,42 @@
 <div class="metrics">
+    <div class="overallmetrics">
+        <p class="heading">{{newLayoutResponse.layout[0].label}}</p>
+        <div class="divider"></div>
+        <table>
+            <tr>
+                <td *ngFor="let val of newLayoutResponse.layout[0].elements" class="head">
+                    <div *ngIf="val.name !== 'summary'">
+                        <div *ngFor="let hero of fieldVal">
+                            <div *ngIf="hero.nam == val.name">
+                                {{hero.label}}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td *ngFor="let val of newLayoutResponse.layout[0].elements" class="value">
+                    <div *ngFor="let item of backendDataResponse.dataPoints | keyvalue">
 
-    <div *ngFor="let layout of newLayoutResponse.layout" class="overall">
+                        <div *ngIf="item.key === val.name">
+                            <div *ngFor="let hero of fieldVal">
+                                <div *ngIf="hero.nam == item.key">
+                                    <p *ngIf="hero.format == 'currency'" class="currency">$</p>
+                                    {{item.value.toFixed(2)}} <p *ngIf="hero.format == 'percent'" class="percent">%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </td>
+            </tr>
+
+
+        </table>
+
+    </div>
+    <div *ngFor="let layout of newLayoutResponse.layout | slice:1:newLayoutResponse.layout.length-1" class="overall">
         <p class="heading" *ngIf="layout.label !== 'Summary'">{{layout.label}}</p>
         <p class="heading-summary" *ngIf="layout.label === 'Summary'">{{layout.label}}</p>
 
@@ -15,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="val.name === 'summary'">
+                    <div *ngIf="val.name === 'summary'" class="summaryoverall">
                         <table class="table1">
 
                             <th class="table-head"
@@ -44,11 +80,11 @@
                                 <div class="header-divider"></div>
                             </tr>
                             <tr>
-                            <td class="table-col total"  *ngFor="let item of total | keyvalue">
+                            <td class="table-col"  *ngFor="let item of total | keyvalue">
                              <div *ngFor="let hero of fieldVal"> 
                                 <div *ngIf="hero.nam == item.key && hero.nam == 'channel';then contentempty">
                                 </div>
-                                    <div *ngIf="hero.nam == item.key && hero.format == 'currency';then content">
+                                    <div class="tot" *ngIf="hero.nam == item.key && hero.format == 'currency';then content">
                                     </div>
                                     <div *ngIf="hero.nam == item.key && hero.format == 'percent';then per">
                                     </div>
@@ -66,6 +102,86 @@
             </tr>
             <tr>
                 <td *ngFor="let val of layout.elements" class="value">
+                    <div *ngFor="let item of backendDataResponse.dataPoints | keyvalue">
+
+                        <div *ngIf="item.key === val.name">
+                            <div *ngFor="let hero of fieldVal">
+                                <div *ngIf="hero.nam == item.key">
+                                    <p *ngIf="hero.format == 'currency'" class="currency">$</p>
+                                    {{item.value.toFixed(2)}} <p *ngIf="hero.format == 'percent'" class="percent">%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </td>
+            </tr>
+
+
+        </table>
+
+    </div>
+
+    <div class="summaryoverall">
+        <p class="heading-summary">
+            Summary</p>
+
+        <div class="divider"></div>
+        <table>
+            <tr>
+                <td *ngFor="let val of newLayoutResponse.layout[newLayoutResponse.layout.length-1].elements" class="head">
+                    <div *ngIf="val.name === 'summary'" >
+                        <table class="table1">
+
+                            <th class="table-head"
+                                *ngFor="let dat of backendDataResponse.dataSets[0].data[0] |keyvalue ">
+                                <div *ngFor="let hero of fieldVal">
+                                    <div *ngIf="hero.nam == dat.key">
+                                        {{hero.label}}
+                                    </div>
+                                </div>
+                            </th>
+                            <tr>
+                                <div class="header-divider"></div>
+                            </tr>
+                            <tr *ngFor="let dat of dataset">
+                                <td class="table-col" *ngFor="let x of dat |keyvalue">
+
+                                    <div *ngFor="let hero of fieldVal">
+                                        <div *ngIf="hero.nam == x.key">
+                                            <p *ngIf="hero.format == 'currency'" class="currency">$</p>
+                                            {{x.value}} <p *ngIf="hero.format == 'percent'" class="percent">%</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <div class="header-divider"></div>
+                            </tr>
+                            <tr>
+                            <td class="table-col"  *ngFor="let item of total | keyvalue">
+                             <div *ngFor="let hero of fieldVal"> 
+                                <div *ngIf="hero.nam == item.key && hero.nam == 'channel';then contentempty">
+                                </div>
+                                    <div class="tot" *ngIf="hero.nam == item.key && hero.format == 'currency';then content">
+                                    </div>
+                                    <div *ngIf="hero.nam == item.key && hero.format == 'percent';then per">
+                                    </div>
+                                    <ng-template #content>
+                                        <p *ngIf="hero.format == 'currency'" class="currency">$</p>
+                                        {{item.value}}</ng-template>
+                                        <ng-template #per>-</ng-template>
+                                        <ng-template #contentempty>Total</ng-template>
+                               </div>
+                            </td>
+                        </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td *ngFor="let val of newLayoutResponse.layout[newLayoutResponse.layout.length-1].elements" class="value">
                     <div *ngFor="let item of backendDataResponse.dataPoints | keyvalue">
 
                         <div *ngIf="item.key === val.name">

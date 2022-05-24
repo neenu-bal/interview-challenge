@@ -10,6 +10,7 @@ export class OverallMetricsComponent implements OnInit {
   newLayoutResponse = newLayoutResponse;
   backendDataResponse = backendDataResponse;
   fieldValue = newLayoutResponse.fieldDefinitions;
+  // layoutVal = JSON.parse(JSON.stringify(newLayoutResponse.layout));
   dataset = backendDataResponse.dataSets[0].data;
   fieldVal: any = [];
   total:any={};
@@ -40,8 +41,14 @@ export class OverallMetricsComponent implements OnInit {
           this.total[val2] = "";
         }
 
-        // console.log(this.total, "valueee-------");
       }
     }
+    // for (const num in this.layoutVal){
+    //   if(this.layoutVal[num].name === "overallMetrics"){
+    //     delete this.layoutVal[num];
+    //   }
+    // }
+    //     console.log(this.layoutVal,newLayoutResponse.layout, "valueee-------");
+
   }
 }
